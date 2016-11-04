@@ -13,9 +13,9 @@ typealias JSONData = [String : Any]
 
 class OMDBClient {
     
-    func makeGETRequest(handler: @escaping (JSONData?) -> Void) {
+    func makeGETRequest(withURLTerms terms: String, handler: @escaping (JSONData?) -> Void) {
         
-        guard let url = URL(string: Constants.Web.baseURL) else {
+        guard let url = URL(string: Constants.Web.searchURL + terms) else {
             print("Error: cannot create URL")
             return
         }

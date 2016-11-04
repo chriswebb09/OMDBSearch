@@ -32,13 +32,21 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1gz-0t-axR">
-                                            <rect key="frame" x="0.0" y="0.0" width="123" height="182"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="123" height="153"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oo1-bI-JPN">
+                                            <rect key="frame" x="0.0" y="153" width="115" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <connections>
                                     <outlet property="imageView" destination="1gz-0t-axR" id="Xql-iM-rxK"/>
+                                    <outlet property="titleLabel" destination="Oo1-bI-JPN" id="rUt-gS-dCJ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

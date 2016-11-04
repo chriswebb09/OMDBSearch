@@ -13,6 +13,8 @@ final class MovieViewController: UICollectionViewController {
     @IBOutlet weak var searchButtonItem: UIBarButtonItem!
     @IBOutlet weak var searchButton: UIButton!
     
+    fileprivate var movieArray = [Movie]()
+    
     fileprivate let reuseIdentifier = "MovieCell"
     fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     
@@ -21,6 +23,8 @@ final class MovieViewController: UICollectionViewController {
     fileprivate let itemsPerRow: CGFloat = 3
     
     fileprivate var imageArray = [UIImage]()
+    
+
 
     var posterImage: UIImage!
     
@@ -38,10 +42,34 @@ final class MovieViewController: UICollectionViewController {
     
     
     func downloadImageForCell() {
+        
+        var searchTerms = searchField.text?.components(separatedBy: " ")
+        
+        
+        var searchURL = ""
+        
+        if (searchField.text?.characters.count)! > 0 {
+            for term in searchTerms! {
+                if searchURL.characters.count > 0 {
+                    searchURL = "\(searchURL)+\(term)"
+                } else {
+                    searchURL = term
+                }
+            }
+            
+            print(searchURL)
+        }
+        
+        
+        
+        
+        
+        
+        print(searchTerms)
         let client = OMDBClient()
         print("here")
         
-        client.makeGETRequest(handler: { json in
+        client.makeGETRequest(withURLTerms: searchURL, handler: { json in
             guard let movieData = json else { return }
             print("inside make get request")
             print("MOVIE \(movieData)")
@@ -49,10 +77,19 @@ final class MovieViewController: UICollectionViewController {
             print("after movie resltsp")
             //[0] as? JSONData; else { return }
             for movieResult in movieResults {
-                let newPoster = movieResult["Poster"] as! String
-                self.imageURL = URL(string: newPoster)!
+                var newMovie = Movie()
+                
+                newMovie.posterURL = movieResult["Poster"] as! String
+                
+                newMovie.title = movieResult["Title"] as! String
+                
+                
+               
+                self.imageURL = URL(string: newMovie.posterURL)!
                 client.downloadImage(url: self.imageURL, handler: { image in
+                    newMovie.poster = image
                     self.posterImage = image
+                    self.movieArray.append(newMovie)
                     self.imageArray.append(image)
                     self.collectionView?.reloadData()
                 })
@@ -93,7 +130,7 @@ extension MovieViewController {
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
         print(imageArray.count)
-        return imageArray.count
+        return movieArray.count
         // return searches[section].searchResults.count
     }
     
@@ -114,8 +151,10 @@ extension MovieViewController {
         //        if imageArray.count > 0 {
         //            cell.imageView.image = posterImage
         //        }
-        
-        cell.imageView.image = imageArray[indexPath.row]
+        let reviseIndex = indexPath.row
+        print(indexPath.row)
+        cell.imageView.image = movieArray[reviseIndex].poster
+        cell.titleLabel.text = movieArray[indexPath.row].title
         return cell
     }
     

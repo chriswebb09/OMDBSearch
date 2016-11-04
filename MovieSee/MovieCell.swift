@@ -11,4 +11,9 @@ import UIKit
 class MovieCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    func configureCell() {
+        titleLabel.sizeToFit()
+    }
 }
