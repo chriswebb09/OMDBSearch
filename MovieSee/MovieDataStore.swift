@@ -12,5 +12,7 @@ class MovieDataStore {
     
     static let sharedInstance = MovieDataStore()
     
+    var movieArray = [Movie]()
+    
     
 }

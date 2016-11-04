@@ -6,13 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movie View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="vdj-ty-Jvy">
             <objects>
-                <collectionViewController id="NXs-UT-3t9" customClass="MovieViewController" customModule="MovieSee" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="NXs-UT-3t9" customClass="HomeViewController" customModule="MovieSee" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="hvZ-Ya-lGz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,7 +49,7 @@
                                 <connections>
                                     <outlet property="imageView" destination="1gz-0t-axR" id="Xql-iM-rxK"/>
                                     <outlet property="titleLabel" destination="Oo1-bI-JPN" id="rUt-gS-dCJ"/>
-                                    <segue destination="uP6-ne-0Zw" kind="show" id="qTw-RX-aLg"/>
+                                    <segue destination="uP6-ne-0Zw" kind="show" identifier="movieDetail" id="qTw-RX-aLg"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -84,9 +85,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchButton" destination="Uew-ls-2zU" id="JjF-at-AyS"/>
+                        <outlet property="searchButton" destination="Uew-ls-2zU" id="0KI-66-7o1"/>
                         <outlet property="searchButtonItem" destination="xoU-jz-sP4" id="rUj-6b-iE5"/>
-                        <outlet property="searchField" destination="VyT-s2-Fy0" id="6ar-Vy-kFw"/>
+                        <outlet property="searchField" destination="VyT-s2-Fy0" id="p2a-VA-9fb"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vdb-1s-IMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -105,19 +106,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-E5-VfJ">
-                                <rect key="frame" x="67" y="190" width="240" height="343"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6Z-lM-rFC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6Z-lM-rFC">
                                 <rect key="frame" x="166" y="134" width="42" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-E5-VfJ">
+                                <rect key="frame" x="67" y="234" width="240" height="343"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="B6Z-lM-rFC" firstAttribute="centerX" secondItem="gXx-2c-09L" secondAttribute="centerX" id="O7p-CQ-M9k"/>
+                            <constraint firstItem="5E8-E5-VfJ" firstAttribute="top" secondItem="tQO-mc-WH7" secondAttribute="bottom" constant="170" id="T3x-Ga-lcV"/>
+                            <constraint firstItem="bvX-H2-JBG" firstAttribute="top" secondItem="B6Z-lM-rFC" secondAttribute="bottom" constant="413" id="T9i-bQ-Gx4"/>
+                            <constraint firstItem="B6Z-lM-rFC" firstAttribute="top" secondItem="tQO-mc-WH7" secondAttribute="bottom" constant="70" id="cEE-Lb-e7d"/>
+                            <constraint firstItem="5E8-E5-VfJ" firstAttribute="leading" secondItem="gXx-2c-09L" secondAttribute="leadingMargin" constant="51" id="iNH-sv-nME"/>
+                            <constraint firstItem="B6Z-lM-rFC" firstAttribute="centerX" secondItem="5E8-E5-VfJ" secondAttribute="centerX" id="m4S-he-Ho4"/>
+                            <constraint firstItem="bvX-H2-JBG" firstAttribute="top" secondItem="5E8-E5-VfJ" secondAttribute="bottom" constant="90" id="vy6-3p-Njg"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="moviePoster" destination="5E8-E5-VfJ" id="6YE-b9-AZg"/>

@@ -24,6 +24,7 @@
 		A7D9AB791DCCDFB6007C5CE3 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AB781DCCDFB6007C5CE3 /* Download.swift */; };
 		A7D9AB7B1DCCE3AF007C5CE3 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AB7A1DCCE3AF007C5CE3 /* MovieDetailViewController.swift */; };
 		A7D9AB7D1DCCE3C1007C5CE3 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AB7C1DCCE3C1007C5CE3 /* MovieDetailView.swift */; };
+		A7D9AB7F1DCD1D85007C5CE3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AB7E1DCD1D85007C5CE3 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		A7D9AB781DCCDFB6007C5CE3 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		A7D9AB7A1DCCE3AF007C5CE3 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		A7D9AB7C1DCCE3C1007C5CE3 /* MovieDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		A7D9AB7E1DCD1D85007C5CE3 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				A7098FB31DCC69110097AF8B /* SearchResults.swift */,
 				A7098FB51DCC77A80097AF8B /* UIView+Extension.swift */,
 				A7098FB71DCCB9140097AF8B /* MovieDataStore.swift */,
+				A7D9AB7E1DCD1D85007C5CE3 /* HomeViewController.swift */,
 			);
 			path = MovieSee;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				A7098FB41DCC69110097AF8B /* SearchResults.swift in Sources */,
 				A7098FB01DCC68EC0097AF8B /* MovieViewController.swift in Sources */,
 				A7D9AB7B1DCCE3AF007C5CE3 /* MovieDetailViewController.swift in Sources */,
+				A7D9AB7F1DCD1D85007C5CE3 /* HomeViewController.swift in Sources */,
 				A7D9AB791DCCDFB6007C5CE3 /* Download.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
