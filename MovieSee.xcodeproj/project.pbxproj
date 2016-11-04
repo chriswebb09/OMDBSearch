@@ -21,6 +21,7 @@
 		A7C984961DCC0206009DB119 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7C984941DCC0206009DB119 /* LaunchScreen.storyboard */; };
 		A7C984A11DCC0206009DB119 /* MovieSeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C984A01DCC0206009DB119 /* MovieSeeTests.swift */; };
 		A7C984AC1DCC0206009DB119 /* MovieSeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C984AB1DCC0206009DB119 /* MovieSeeUITests.swift */; };
+		A7D9AB791DCCDFB6007C5CE3 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AB781DCCDFB6007C5CE3 /* Download.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		A7C984A71DCC0206009DB119 /* MovieSeeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieSeeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7C984AB1DCC0206009DB119 /* MovieSeeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSeeUITests.swift; sourceTree = "<group>"; };
 		A7C984AD1DCC0206009DB119 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7D9AB781DCCDFB6007C5CE3 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				A7C984941DCC0206009DB119 /* LaunchScreen.storyboard */,
 				A7C984971DCC0206009DB119 /* Info.plist */,
 				A723AFD91DCC54C000881182 /* OMDBClient.swift */,
+				A7D9AB781DCCDFB6007C5CE3 /* Download.swift */,
 				A7098FAD1DCC62B40097AF8B /* Constants.swift */,
 				A7098FAF1DCC68EC0097AF8B /* MovieViewController.swift */,
 				A7098FB11DCC68FF0097AF8B /* MovieCell.swift */,
@@ -292,6 +295,7 @@
 				A7C9848C1DCC0206009DB119 /* AppDelegate.swift in Sources */,
 				A7098FB41DCC69110097AF8B /* SearchResults.swift in Sources */,
 				A7098FB01DCC68EC0097AF8B /* MovieViewController.swift in Sources */,
+				A7D9AB791DCCDFB6007C5CE3 /* Download.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,7 @@ final class MovieViewController: UICollectionViewController {
     
     fileprivate var searches = [SearchResults]()
     fileprivate let omdbClient = OMDBClient()
-    fileprivate let itemsPerRow: CGFloat = 3
+    fileprivate let itemsPerRow: CGFloat = 2
     
     fileprivate var imageArray = [UIImage]()
     
@@ -86,6 +86,7 @@ final class MovieViewController: UICollectionViewController {
                 
                
                 self.imageURL = URL(string: newMovie.posterURL)!
+                self.movieArray.removeAll()
                 client.downloadImage(url: self.imageURL, handler: { image in
                     newMovie.poster = image
                     self.posterImage = image

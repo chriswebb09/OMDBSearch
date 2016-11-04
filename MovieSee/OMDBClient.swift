@@ -26,6 +26,7 @@ class OMDBClient {
         
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             DispatchQueue.main.async {
+                
                 guard let data = data else { handler(nil); return }
                 guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as! JSONData else { handler(nil); return }
                 
