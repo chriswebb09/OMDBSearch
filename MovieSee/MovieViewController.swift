@@ -126,7 +126,7 @@ extension MovieViewController : UITextFieldDelegate {
         activityIndicator.startAnimating()
         
         OMDBClient().searchOmdbForTerm(textField.text!) {
-            results, error in
+            results, error, json in
             
             
             activityIndicator.removeFromSuperview()

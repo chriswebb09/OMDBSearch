@@ -14,5 +14,7 @@ class MovieDataStore {
     
     var movieArray = [Movie]()
     
+    var searchResults = [SearchResults]()
+    
     
 }
