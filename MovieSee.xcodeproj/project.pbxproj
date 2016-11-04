@@ -22,6 +22,8 @@
 		A7C984A11DCC0206009DB119 /* MovieSeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C984A01DCC0206009DB119 /* MovieSeeTests.swift */; };
 		A7C984AC1DCC0206009DB119 /* MovieSeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C984AB1DCC0206009DB119 /* MovieSeeUITests.swift */; };
 		A7D9AB791DCCDFB6007C5CE3 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AB781DCCDFB6007C5CE3 /* Download.swift */; };
+		A7D9AB7B1DCCE3AF007C5CE3 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AB7A1DCCE3AF007C5CE3 /* MovieDetailViewController.swift */; };
+		A7D9AB7D1DCCE3C1007C5CE3 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D9AB7C1DCCE3C1007C5CE3 /* MovieDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		A7C984AB1DCC0206009DB119 /* MovieSeeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSeeUITests.swift; sourceTree = "<group>"; };
 		A7C984AD1DCC0206009DB119 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7D9AB781DCCDFB6007C5CE3 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		A7D9AB7A1DCCE3AF007C5CE3 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		A7D9AB7C1DCCE3C1007C5CE3 /* MovieDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 				A723AFDB1DCC54D400881182 /* Movie.swift */,
 				A7C9848B1DCC0206009DB119 /* AppDelegate.swift */,
 				A7C9848F1DCC0206009DB119 /* Main.storyboard */,
+				A7D9AB7A1DCCE3AF007C5CE3 /* MovieDetailViewController.swift */,
+				A7D9AB7C1DCCE3C1007C5CE3 /* MovieDetailView.swift */,
 				A7C984921DCC0206009DB119 /* Assets.xcassets */,
 				A7C984941DCC0206009DB119 /* LaunchScreen.storyboard */,
 				A7C984971DCC0206009DB119 /* Info.plist */,
@@ -292,9 +298,11 @@
 				A7098FB61DCC77A80097AF8B /* UIView+Extension.swift in Sources */,
 				A723AFDA1DCC54C000881182 /* OMDBClient.swift in Sources */,
 				A723AFDC1DCC54D400881182 /* Movie.swift in Sources */,
+				A7D9AB7D1DCCE3C1007C5CE3 /* MovieDetailView.swift in Sources */,
 				A7C9848C1DCC0206009DB119 /* AppDelegate.swift in Sources */,
 				A7098FB41DCC69110097AF8B /* SearchResults.swift in Sources */,
 				A7098FB01DCC68EC0097AF8B /* MovieViewController.swift in Sources */,
+				A7D9AB7B1DCCE3AF007C5CE3 /* MovieDetailViewController.swift in Sources */,
 				A7D9AB791DCCDFB6007C5CE3 /* Download.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

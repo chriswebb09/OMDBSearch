@@ -16,7 +16,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="hvZ-Ya-lGz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93341159326424872" green="0.93341159326424872" blue="0.93341159326424872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4rv-cQ-Xwc">
                             <size key="itemSize" width="173" height="231"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -44,9 +44,11 @@
                                         </label>
                                     </subviews>
                                 </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="imageView" destination="1gz-0t-axR" id="Xql-iM-rxK"/>
                                     <outlet property="titleLabel" destination="Oo1-bI-JPN" id="rUt-gS-dCJ"/>
+                                    <segue destination="uP6-ne-0Zw" kind="show" id="qTw-RX-aLg"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -90,6 +92,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vdb-1s-IMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1655.2" y="126.38680659670166"/>
+        </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="X5i-nh-0hi">
+            <objects>
+                <viewController id="uP6-ne-0Zw" customClass="MovieDetailViewController" customModule="MovieSee" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tQO-mc-WH7"/>
+                        <viewControllerLayoutGuide type="bottom" id="bvX-H2-JBG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gXx-2c-09L" customClass="MovieDetailView" customModule="MovieSee" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-E5-VfJ">
+                                <rect key="frame" x="67" y="190" width="240" height="343"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6Z-lM-rFC">
+                                <rect key="frame" x="166" y="134" width="42" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="moviePoster" destination="5E8-E5-VfJ" id="6YE-b9-AZg"/>
+                        <outlet property="movieTitleLabel" destination="B6Z-lM-rFC" id="7Hq-KY-Q24"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EA2-Dn-5NA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2588" y="126.38680659670166"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VoF-Ep-fFu">
