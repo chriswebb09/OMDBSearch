@@ -9,11 +9,9 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
-    
     var passedMovie: Movie = Movie()
     
     @IBOutlet weak var moviePoster: UIImageView!
-    
     @IBOutlet weak var movieTitleLabel: UILabel!
     
     override func viewDidLoad() {
@@ -22,7 +20,4 @@ class MovieDetailViewController: UIViewController {
         moviePoster.image = passedMovie.poster
         movieTitleLabel.text = passedMovie.title
     }
-    
-    
-    
 }

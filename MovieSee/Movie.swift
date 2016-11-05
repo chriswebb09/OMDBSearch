@@ -9,12 +9,6 @@
 import UIKit
 
 struct Movie {
-    /// The hash value.
-    ///
-    /// Hash values are not guaranteed to be equal across different executions of
-    /// your program. Do not save hash values to use during a future execution.
-    
-    
     var title: String
     var posterURL: String
     var year: String
@@ -27,14 +21,11 @@ struct Movie {
         self.poster = poster
     }
     
-    
     init() {
         self.init(title: "N/A", posterURL: "None", year: "Unknown", poster: nil)
     }
     
-    
     init(title: String, posterURL:String, year:String) {
         self.init(title:title, posterURL: posterURL, year: year, poster:nil)
     }
-
 }
