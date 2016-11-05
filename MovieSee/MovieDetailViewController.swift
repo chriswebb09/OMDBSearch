@@ -16,7 +16,6 @@ class MovieDetailViewController: UIViewController {
     
     @IBOutlet weak var movieTitleLabel: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(passedMovie)

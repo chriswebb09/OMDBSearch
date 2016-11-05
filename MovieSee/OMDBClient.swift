@@ -51,7 +51,6 @@ class OMDBClient {
     func downloadImage(url: URL, handler: @escaping (UIImage) -> Void) {
         print("Download Started")
         getDataFromUrl(url: url) { (data, response, error)  in
-            
             let op2 = BlockOperation(block: {
                 guard let data = data, error == nil else { return }
                 OperationQueue.main.addOperation({
@@ -66,7 +65,6 @@ class OMDBClient {
     }
     
     func searchAPI(withURL url: String?, terms: String?,  handler: @escaping (SearchResults?) -> Void) {
-        
         var returnedMovies = [Movie]()
         makeGETRequest(withURLTerms: url!, handler: { json in
             var movieData = json?["Search"] as! [[String: AnyObject]]

@@ -35,21 +35,9 @@ final class HomeViewController: UICollectionViewController {
 extension HomeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-//        shared.searchAPI(withURL: "me", terms: "me",  handler: { result in
-//            self.store.searchResults.append(result!)
-//            
-//            print(self.store.searchResults)
-//            self.store.searchResults.forEach { mov in
-//
-//                self.store.movieArray = mov.searchResults
-//                self.collectionView?.reloadData()
-//            }
-//        })
-//
-//        self.collectionView?.delegate = self
-//        self.collectionView?.dataSource = self
+        
         self.searchButton.addTarget(self, action: #selector(downloadFromAPI), for: .touchUpInside)
-//        activityIndicator.hidesWhenStopped = true
+        //        activityIndicator.hidesWhenStopped = true
     }
     
     func downloadFromAPI() {
@@ -74,9 +62,6 @@ extension HomeViewController {
                     DispatchQueue.main.async {
                         self.store.movieArray = mov.searchResults
                     }
-                    
-                    
-                    
                 }
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
@@ -85,7 +70,7 @@ extension HomeViewController {
             
             self.collectionView?.delegate = self
             self.collectionView?.dataSource = self
-            self.searchField.text = nil 
+            self.searchField.text = nil
             //activityIndicator.hidesWhenStopped = true
         }
     }
@@ -94,78 +79,27 @@ extension HomeViewController {
 extension HomeViewController : UITextFieldDelegate {
     //searchField
     
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        let searchTerms = searchField.text?.components(separatedBy: " ")
-//        if (searchField.text?.characters.count)! > 0 {
-//            for term in searchTerms! {
-//                if searchURL.characters.count > 0 {
-//                    searchURL = "\(searchURL)+\(term)"
-//                } else {
-//                    searchURL = term
-//                }
-//            }
-//            print(searchURL)
-//        }
-//        textField.text = nil
-//        textField.resignFirstResponder()
-//        return true
-//    }
-    
-//    func downloadFromAPI() {
-//        
-//        self.searches.removeAll()
-//        let searchTerms = searchField.text?.components(separatedBy: " ")
-//        if (searchField.text?.characters.count)! > 0 {
-//            for term in searchTerms! {
-//                if searchURL.characters.count > 0 {
-//                    searchURL = "\(searchURL)+\(term)"
-//                } else {
-//                    searchURL = term
-//                }
-//            }
-//            
-//        shared.searchAPI(withURL: searchURL, terms: searchURL,  handler: { result in
-//            self.store.searchResults.append(result!)
-//
-//            print(self.store.searchResults)
-//            self.store.searchResults.forEach { mov in
-//
-//                self.store.movieArray = mov.searchResults
-//                self.collectionView?.reloadData()
-//            }
-//        })
-//            self.collectionView?.delegate = self
-//            self.collectionView?.dataSource = self
-//            //activityIndicator.hidesWhenStopped = true
-//        }
-//    }
+    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //        let searchTerms = searchField.text?.components(separatedBy: " ")
+    //        if (searchField.text?.characters.count)! > 0 {
+    //            for term in searchTerms! {
+    //                if searchURL.characters.count > 0 {
+    //                    searchURL = "\(searchURL)+\(term)"
+    //                } else {
+    //                    searchURL = term
+    //                }
+    //            }
+    //            print(searchURL)
+    //        }
+    //        textField.text = nil
+    //        textField.resignFirstResponder()
+    //        return true
+    //    }
 }
-
-
-//            searchField.addSubview(activityIndicator)
-//            activityIndicator.frame = searchField.bounds
-//            activityIndicator.startAnimating()
-//            
-//            
-//            self.searches.removeAll()
-            
-//            omdbClient.searchAPI(withURL: searchURL, terms: searchTerms?[0], handler: { jsonDict in
-//                print(jsonDict)
-//            })
-//            omdbClient.makeGETRequest(withURLTerms:searchURL, handler: { json in
-//                print(self.store.movieArray)
-//                self.collectionView?.reloadData()
-//            })
-
-
-
 
 private extension HomeViewController {
     func movieForIndexPath(_ indexPath: IndexPath) -> Movie {
         return self.store.movieArray[(indexPath as NSIndexPath).row]
-        //return self.store.searchResultss[(indexPath as NSIndexPath).row]
-        //return (searches.last?.searchResults[(indexPath as NSIndexPath).row])!
-        //return searches[(indexPath as NSIndexPath).section].searchResults[(indexPath as NSIndexPath).row]
     }
 }
 
@@ -178,9 +112,6 @@ extension HomeViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("------\n\n\n\n\n")
-        print(self.store.movieArray.count)
-        
         return self.store.movieArray.count
         //return searches[section].searchResults.count
     }
@@ -198,7 +129,6 @@ extension HomeViewController {
         cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
         
         cell.layer.shouldRasterize = true
-        //let movie = self.searches[self.searches.count - 1].searchResults[indexPath.row]
         let movie = movieForIndexPath(indexPath)
         cell.imageView.image = movie.poster!
         cell.titleLabel.text = movie.title
