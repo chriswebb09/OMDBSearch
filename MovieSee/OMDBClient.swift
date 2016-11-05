@@ -57,7 +57,7 @@ class OMDBClient {
     
     func makeGETRequest(withURLTerms terms: String, handler: @escaping (JSONData?) -> Void) {
         
-        guard let url = URL(string: Constants.Web.baseURL) else { return }
+        guard let url = URL(string: Constants.Web.searchURL + terms) else { return }
         
         let urlRequest = URLRequest(url: url)
         
@@ -97,8 +97,9 @@ class OMDBClient {
     }
     
     func searchAPI(withURL url: String?, terms: String?,  handler: @escaping (SearchResults?) -> Void) {
+        print("URL \(url!)\n\n\n\n")
         var returnedMovies = [Movie]()
-        makeGETRequest(withURLTerms: terms!, handler: { json in
+        makeGETRequest(withURLTerms: url!, handler: { json in
             //print(json)
             
             

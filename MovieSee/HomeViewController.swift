@@ -35,46 +35,25 @@ final class HomeViewController: UICollectionViewController {
 extension HomeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        shared.searchAPI(withURL: "me", terms: "me",  handler: { result in
-            self.store.searchResults.append(result!)
-            
-            print(self.store.searchResults)
-            self.store.searchResults.forEach { mov in
-
-                self.store.movieArray = mov.searchResults
-                self.collectionView?.reloadData()
-            }
-        })
-
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
+//        shared.searchAPI(withURL: "me", terms: "me",  handler: { result in
+//            self.store.searchResults.append(result!)
+//            
+//            print(self.store.searchResults)
+//            self.store.searchResults.forEach { mov in
+//
+//                self.store.movieArray = mov.searchResults
+//                self.collectionView?.reloadData()
+//            }
+//        })
+//
+//        self.collectionView?.delegate = self
+//        self.collectionView?.dataSource = self
         self.searchButton.addTarget(self, action: #selector(downloadFromAPI), for: .touchUpInside)
-        activityIndicator.hidesWhenStopped = true
-    }
-}
-
-extension HomeViewController : UITextFieldDelegate {
-    //searchField
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let searchTerms = searchField.text?.components(separatedBy: " ")
-        if (searchField.text?.characters.count)! > 0 {
-            for term in searchTerms! {
-                if searchURL.characters.count > 0 {
-                    searchURL = "\(searchURL)+\(term)"
-                } else {
-                    searchURL = term
-                }
-            }
-            print(searchURL)
-        }
-        textField.text = nil
-        textField.resignFirstResponder()
-        return true
+//        activityIndicator.hidesWhenStopped = true
     }
     
     func downloadFromAPI() {
-        
+        self.searchURL.removeAll()
         self.searches.removeAll()
         let searchTerms = searchField.text?.components(separatedBy: " ")
         if (searchField.text?.characters.count)! > 0 {
@@ -86,12 +65,81 @@ extension HomeViewController : UITextFieldDelegate {
                 }
             }
             
-            searchField.addSubview(activityIndicator)
-            activityIndicator.frame = searchField.bounds
-            activityIndicator.startAnimating()
-            
-            
-            self.searches.removeAll()
+            shared.searchAPI(withURL: searchURL, terms: searchURL,  handler: { result in
+                self.store.searchResults.append(result!)
+                
+                print(self.store.searchResults)
+                self.store.searchResults.forEach { mov in
+                    
+                    self.store.movieArray = mov.searchResults
+                    self.collectionView?.reloadData()
+                }
+            })
+            self.collectionView?.delegate = self
+            self.collectionView?.dataSource = self
+            self.searchField.text = nil 
+            //activityIndicator.hidesWhenStopped = true
+        }
+    }
+}
+
+extension HomeViewController : UITextFieldDelegate {
+    //searchField
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        let searchTerms = searchField.text?.components(separatedBy: " ")
+//        if (searchField.text?.characters.count)! > 0 {
+//            for term in searchTerms! {
+//                if searchURL.characters.count > 0 {
+//                    searchURL = "\(searchURL)+\(term)"
+//                } else {
+//                    searchURL = term
+//                }
+//            }
+//            print(searchURL)
+//        }
+//        textField.text = nil
+//        textField.resignFirstResponder()
+//        return true
+//    }
+    
+//    func downloadFromAPI() {
+//        
+//        self.searches.removeAll()
+//        let searchTerms = searchField.text?.components(separatedBy: " ")
+//        if (searchField.text?.characters.count)! > 0 {
+//            for term in searchTerms! {
+//                if searchURL.characters.count > 0 {
+//                    searchURL = "\(searchURL)+\(term)"
+//                } else {
+//                    searchURL = term
+//                }
+//            }
+//            
+//        shared.searchAPI(withURL: searchURL, terms: searchURL,  handler: { result in
+//            self.store.searchResults.append(result!)
+//
+//            print(self.store.searchResults)
+//            self.store.searchResults.forEach { mov in
+//
+//                self.store.movieArray = mov.searchResults
+//                self.collectionView?.reloadData()
+//            }
+//        })
+//            self.collectionView?.delegate = self
+//            self.collectionView?.dataSource = self
+//            //activityIndicator.hidesWhenStopped = true
+//        }
+//    }
+}
+
+
+//            searchField.addSubview(activityIndicator)
+//            activityIndicator.frame = searchField.bounds
+//            activityIndicator.startAnimating()
+//            
+//            
+//            self.searches.removeAll()
             
 //            omdbClient.searchAPI(withURL: searchURL, terms: searchTerms?[0], handler: { jsonDict in
 //                print(jsonDict)
@@ -100,9 +148,7 @@ extension HomeViewController : UITextFieldDelegate {
 //                print(self.store.movieArray)
 //                self.collectionView?.reloadData()
 //            })
-        }
-    }
-}
+
 
 
 
