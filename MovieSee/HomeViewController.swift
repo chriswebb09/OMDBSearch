@@ -71,10 +71,18 @@ extension HomeViewController {
                 print(self.store.searchResults)
                 self.store.searchResults.forEach { mov in
                     
-                    self.store.movieArray = mov.searchResults
+                    DispatchQueue.main.async {
+                        self.store.movieArray = mov.searchResults
+                    }
+                    
+                    
+                    
+                }
+                DispatchQueue.main.async {
                     self.collectionView?.reloadData()
                 }
             })
+            
             self.collectionView?.delegate = self
             self.collectionView?.dataSource = self
             self.searchField.text = nil 
