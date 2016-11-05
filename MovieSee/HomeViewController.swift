@@ -133,15 +133,22 @@ extension HomeViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MovieCell
-        cell.backgroundColor = UIColor.white
+        //cell.backgroundColor = UIColor.white
         
+        cell.layer.cornerRadius = 2
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOpacity = 1
+        cell.layer.shadowOffset = CGSize(width: 6, height: 10)
+        cell.layer.shadowRadius = 6
+        
+        cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
+        
+        cell.layer.shouldRasterize = true
         //let movie = self.searches[self.searches.count - 1].searchResults[indexPath.row]
         let movie = movieForIndexPath(indexPath)
         cell.imageView.image = movie.poster!
         cell.titleLabel.text = movie.title
-        if self.searches.count > 0 {
-            
-        }
+        
         return cell
     }
     
