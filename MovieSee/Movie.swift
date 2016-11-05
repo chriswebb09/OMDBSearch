@@ -8,7 +8,18 @@
 
 import UIKit
 
-struct Movie {
+struct Movie: Hashable {
+    /// The hash value.
+    ///
+    /// Hash values are not guaranteed to be equal across different executions of
+    /// your program. Do not save hash values to use during a future execution.
+    
+    
+    var hashValue: Int {
+        return self.title.hash
+    }
+
+
     
     var title: String
     var director: String
@@ -34,8 +45,13 @@ struct Movie {
         self.actors = actors
     }
     
+    
     init() {
         self.init(title:"N/A", director: "N/A", rated:"N/A", runtime: "N/A", plot:"N/A", posterURL: "none", poster: UIImage(), genre: ["None"], released: "N/A", actors: ["None"])
+    }
+    
+    static func ==(left: Movie, right: Movie) -> Bool {
+        return left.title == right.title
     }
 }
 

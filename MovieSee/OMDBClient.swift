@@ -12,8 +12,7 @@ import UIKit
 typealias JSONData = [String : Any]
 
 class OMDBClient {
-    
- var store = MovieDataStore.sharedInstance
+    var store = MovieDataStore.sharedInstance
     
     func makeGETRequest(withURLTerms terms: String, handler: @escaping (JSONData?) -> Void) {
         
@@ -35,24 +34,17 @@ class OMDBClient {
                 handler(json)
             }
         })
-        
         task.resume()
     }
     
-    
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
-        
-        URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
+        URLSession.shared.dataTask(with: url) { data, response, error in
             completion(data, response, error)
             }.resume()
     }
     
-    
-    
     func downloadImage(url: URL, handler: @escaping (UIImage) -> Void) {
         print("Download Started")
-        
         getDataFromUrl(url: url) { (data, response, error)  in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
@@ -63,22 +55,13 @@ class OMDBClient {
         }
     }
     
-    func searchOmdbForTerm(_ searchTerm: String, completion : @escaping (_ results: SearchResults?, _ error : NSError?, _ json: JSONData?) -> Void){
-        
-        guard let searchURL = omdbURLForSearchTerm(searchTerm) else {
-            let APIError = NSError(domain: "OMDBSearch", code: 0, userInfo: [NSLocalizedFailureReasonErrorKey:"Unknown API response"])
-            completion(nil, APIError, nil)
-            return
-        }
-        
-        let searchRequest = URLRequest(url: searchURL)
+    func searchOmdbForTerm(_ searchTerm: String, completion : @escaping (_ results: SearchResults?, _ error : NSError?, _ json: JSONData?, _ pages: String?) -> Void){
         
         self.getDataFromUrl(url: URL(string:Constants.Web.searchURL + searchTerm)!, completion: { data, response, error in
-        
             if let _ = error {
                 let APIError = NSError(domain: "OMDBSearch", code: 0, userInfo: [NSLocalizedFailureReasonErrorKey:"Unknown API response"])
                 OperationQueue.main.addOperation({
-                    completion(nil, APIError, nil)
+                    completion(nil, APIError, nil, nil)
                 })
                 return
             }
@@ -87,49 +70,53 @@ class OMDBClient {
                 let data = data else {
                     let APIError = NSError(domain: "OMDBSearch", code: 0, userInfo: [NSLocalizedFailureReasonErrorKey:"Unknown API response"])
                     OperationQueue.main.addOperation({
-                        completion(nil, APIError, nil)
+                        completion(nil, APIError, nil, nil)
                     })
                     return
             }
             
-            do {
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as! JSONData else { return }
+            guard let movieResults = json["Search"] as? [JSONData] else { return }
+            guard let total = json["totalResults"] as? String else { return }
+            
+            for movie in movieResults {
                 
-                guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as! JSONData else { return }
-                // guard let movieData = json else { return }
-                guard let movieResults = json["Search"] as? [JSONData] else { return }
+                var newMovie = Movie()
+                newMovie.posterURL = (movie["Poster"] as? String)!
+                newMovie.title = (movie["Title"] as? String)!
                 
-                for movie in movieResults {
-                    
-                    var newMovie = Movie()
-                    
-                    newMovie.posterURL = (movie["Poster"] as? String)!
-                    
-                    newMovie.title = (movie["Title"] as? String)!
-                    
-                    self.downloadImage(url: URL(string: newMovie.posterURL)!, handler: { image in
-                        newMovie.poster = image
-                        let APIError = NSError(domain: "OMDBSearch", code: 0, userInfo: [NSLocalizedFailureReasonErrorKey:"Unknown API response"])
-                        self.store.movieArray.append(newMovie)
-                        var result = SearchResults(searchTerm: searchTerm, searchResults: self.store.movieArray)
-                        self.store.searchResults.append(result)
-                        var results = [SearchResults]()
-                        results.append(result)
-                        completion(result, APIError, json)
-                    })
-                    
+                self.store.movieArray.removeAll()
                 
-                }
-            }  catch _ {
-                completion(nil, nil, nil)
-                return
+                self.downloadImage(url: URL(string: newMovie.posterURL)!, handler: { image in
+                    
+                    newMovie.poster = image
+                    let APIError = NSError(domain: "OMDBSearch", code: 0, userInfo: [NSLocalizedFailureReasonErrorKey:"Unknown API response"])
+                    
+                    
+                    
+                   
+                    
+                    self.store.movieArray.append(newMovie)
+                    let movies = Set<Movie>(self.store.movieArray)
+                    
+                    
+                    self.store.movieArray = Array(movies)
+                    let result = SearchResults(searchTerm: searchTerm, searchResults: self.store.movieArray)
+                    self.store.searchResults.append(result)
+                    var results = [SearchResults]()
+                    
+                    results.append(result)
+                    completion(result, APIError, json, total)
+                })
             }
+            
         })
     }
 }
 
 fileprivate func omdbURLForSearchTerm(_ searchTerm:String) -> URL? {
     
-    guard let escapeSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else {
+    guard searchTerm.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) != nil else {
         return nil
     }
     guard let url = URL(string:Constants.Web.omdbURL) else {

@@ -38,82 +38,6 @@ final class MovieViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.searchButton.addTarget(self, action: #selector(downloadImageForCell), for: .touchUpInside)
-        
-    }
-    
-    
-    
-    func downloadImageForCell() {
-        
-        var searchTerms = searchField.text?.components(separatedBy: " ")
-        
-        
-        var searchURL = ""
-        
-        if (searchField.text?.characters.count)! > 0 {
-            for term in searchTerms! {
-                if searchURL.characters.count > 0 {
-                    searchURL = "\(searchURL)+\(term)"
-                } else {
-                    searchURL = term
-                }
-            }
-            
-            print(searchURL)
-        }
-        
-        
-        
-        
-        
-        
-        print(searchTerms)
-        let client = OMDBClient()
-        print("here")
-        
-        client.makeGETRequest(withURLTerms: searchURL, handler: { json in
-            guard let movieData = json else { return }
-            print("inside make get request")
-            print("MOVIE \(movieData)")
-            guard let movieResults = movieData["Search"] as? [JSONData] else { return }
-            print("after movie resltsp")
-            //[0] as? JSONData; else { return }
-            for movieResult in movieResults {
-                var newMovie = Movie()
-                
-                newMovie.posterURL = movieResult["Poster"] as! String
-                
-                newMovie.title = movieResult["Title"] as! String
-                
-                
-                
-                self.imageURL = URL(string: newMovie.posterURL)!
-                self.movieArray.removeAll()
-                client.downloadImage(url: self.imageURL, handler: { image in
-                    newMovie.poster = image
-                    self.posterImage = image
-                    self.movieArray.append(newMovie)
-                    self.movieStore.movieArray.append(newMovie)
-                    self.imageArray.append(image)
-                    self.collectionView?.reloadData()
-                })
-            }
-            if let imageURLString = movieResults[0]["Poster"] as? String {
-                print(imageURLString)
-                
-                self.imageURL = URL(string: imageURLString)!
-                print(self.imageURL)
-                
-            }
-            
-            client.downloadImage(url: self.imageURL, handler: { image in
-                self.posterImage = image
-                self.imageArray.append(image)
-                self.collectionView?.reloadData()
-            })
-        })
     }
 }
 
@@ -124,95 +48,12 @@ extension MovieViewController : UITextFieldDelegate {
         textField.addSubview(activityIndicator)
         activityIndicator.frame = textField.bounds
         activityIndicator.startAnimating()
-        
-        OMDBClient().searchOmdbForTerm(textField.text!) {
-            results, error, json in
-            
-            
-            activityIndicator.removeFromSuperview()
-            
-            
-            if let error = error {
-                // 2
-                print("Error searching : \(error)")
-                return
-            }
-            
-            if let results = results {
-                // 3
-                print("Found \(results.searchResults.count) matching \(results.searchTerm)")
-                self.searches.insert(results, at: 0)
-                
-                // 4
-                self.collectionView?.reloadData()
-            }
-        }
-        
         textField.text = nil
         textField.resignFirstResponder()
         return true
     }
 }
 
-
-//extension MovieViewController : UITextFieldDelegate {
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        
-//        
-//        var searchTerms = searchField.text?.components(separatedBy: " ")
-//        
-//        
-//        var searchURL = ""
-//        
-//        if (searchField.text?.characters.count)! > 0 {
-//            for term in searchTerms! {
-//                if searchURL.characters.count > 0 {
-//                    searchURL = "\(searchURL)+\(term)"
-//                } else {
-//                    searchURL = term
-//                }
-//            }
-//            
-//            print(searchURL)
-//        }
-//        // 1
-//        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-//        textField.addSubview(activityIndicator)
-//        activityIndicator.frame = textField.bounds
-//        activityIndicator.startAnimating()
-//        
-//        omdbClient.searchOmdbForTerm(textField.text!) {
-//            results, error in
-//            // omdbClient.makeGETRequest(withURLTerms: searchURL, handler: { results, error in
-//            
-//            
-//            activityIndicator.removeFromSuperview()
-//            
-//            
-//            if let error = error {
-//                // 2
-//                print("Error searching : \(error)")
-//                return
-//            }
-//            
-//            if let results = results {
-//                // 3
-//                print("Found \(results.searchResults.count) matching \(results.searchTerm)")
-//                self.searches.insert(results, at: 0)
-//                
-//                // 4
-//                self.collectionView?.reloadData()
-//            }
-//            
-//            
-//            
-//           
-//        }
-//        textField.text = nil
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//}
 // MARK: - Private
 private extension MovieViewController {
     func movieForIndexPath(_ indexPath: IndexPath) -> Movie {

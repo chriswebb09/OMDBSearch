@@ -22,7 +22,7 @@ final class HomeViewController: UICollectionViewController {
     var searchURL = ""
     
     fileprivate let reuseIdentifier = "MovieCell"
-    fileprivate let sectionInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 50.0, right: 20.0)
+    fileprivate let sectionInsets = UIEdgeInsets(top: 40.0, left: 30.0, bottom: 50.0, right: 30.0)
     fileprivate var searches = [SearchResults]()
     fileprivate let omdbClient = OMDBClient()
     fileprivate let itemsPerRow: CGFloat = 2
@@ -41,6 +41,7 @@ extension HomeViewController {
 }
 
 extension HomeViewController : UITextFieldDelegate {
+    //searchField
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let searchTerms = searchField.text?.components(separatedBy: " ")
@@ -54,29 +55,13 @@ extension HomeViewController : UITextFieldDelegate {
             }
             print(searchURL)
         }
-        
-        textField.addSubview(activityIndicator)
-        activityIndicator.frame = textField.bounds
-        activityIndicator.startAnimating()
-        
-        OMDBClient().searchOmdbForTerm(textField.text!) {
-            results, error, json in
-            self.activityIndicator.removeFromSuperview()
-            if let error = error {
-                print("Error searching : \(error)")
-                return
-            }
-            if let results = results {
-                print("Found \(results.searchResults.count) matching \(results.searchTerm)")
-                self.searches.insert(results, at: 0)
-            }
-        }
         textField.text = nil
         textField.resignFirstResponder()
         return true
     }
     
     func downloadFromAPI() {
+        self.searches.removeAll()
         let client = OMDBClient()
         let searchTerms = searchField.text?.components(separatedBy: " ")
         if (searchField.text?.characters.count)! > 0 {
@@ -87,18 +72,36 @@ extension HomeViewController : UITextFieldDelegate {
                     searchURL = term
                 }
             }
-            client.searchOmdbForTerm(searchURL, completion: { result, error, json in
+            searchField.addSubview(activityIndicator)
+            activityIndicator.frame = searchField.bounds
+            activityIndicator.startAnimating()
+
+            self.searches.removeAll()
+            client.searchOmdbForTerm(searchURL, completion: { result, error, json, page in
+//                if Int(page!)! > 10 {
+//                    client.searchOmdbForTerm(self.searchURL + "&page=2", completion: { result, error, json, page in
+//                        print(page!)
+//                        self.searches.append(result!)
+//                        self.collectionView?.reloadData()
+//                    })
+//                    
+//                }
+                
+                print(page!)
                 self.searches.append(result!)
+                self.activityIndicator.stopAnimating()
                 self.collectionView?.reloadData()
             })
         }
+        collectionView?.reloadData()
     }
 }
 
 
 private extension HomeViewController {
     func movieForIndexPath(_ indexPath: IndexPath) -> Movie {
-        return searches[(indexPath as NSIndexPath).section].searchResults[(indexPath as NSIndexPath).row]
+        return (searches.last?.searchResults[(indexPath as NSIndexPath).row])!
+        //return searches[(indexPath as NSIndexPath).section].searchResults[(indexPath as NSIndexPath).row]
     }
 }
 
@@ -116,8 +119,9 @@ extension HomeViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MovieCell
         cell.backgroundColor = UIColor.white
-        self.searches[self.searches.count - 1].searchResults[indexPath.row]
-        let movie = self.searches[self.searches.count - 1].searchResults[indexPath.row]
+        
+        //let movie = self.searches[self.searches.count - 1].searchResults[indexPath.row]
+        let movie = movieForIndexPath(indexPath)
         if self.searches.count > 0 {
             if movie.poster != nil {
                 cell.imageView.image = movie.poster
