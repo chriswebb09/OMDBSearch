@@ -8,14 +8,12 @@
 
 import UIKit
 
-
 struct Padding {
     let top: CGFloat
     let bottom: CGFloat
     let leading: CGFloat
     let trailing: CGFloat
 }
-
 
 extension UIView {
     

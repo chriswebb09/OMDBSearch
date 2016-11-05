@@ -66,12 +66,14 @@ class OMDBClient {
     }
     
     func searchAPI(withURL url: String?, terms: String?,  handler: @escaping (SearchResults?) -> Void) {
-        print("URL \(url!)\n\n\n\n")
+        
         var returnedMovies = [Movie]()
         makeGETRequest(withURLTerms: url!, handler: { json in
             var movieData = json?["Search"] as! [[String: AnyObject]]
             var movieResult = SearchResults()
+            
             movieData.forEach { movieRes in
+                
                 let title = movieRes["Title"] as? String
                 let posterURL = movieRes["Poster"] as? String
                 let year = movieRes["Year"] as? String

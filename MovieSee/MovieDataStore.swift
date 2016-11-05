@@ -9,12 +9,7 @@
 import UIKit
 
 class MovieDataStore {
-    
     static let sharedInstance = MovieDataStore()
-    
     var movieArray = [Movie]()
-    
     var searchResults = [SearchResults]()
-    
-    
 }
