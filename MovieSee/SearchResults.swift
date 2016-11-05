@@ -9,6 +9,11 @@
 import Foundation
 
 struct SearchResults {
-    let searchTerm : String
-    let searchResults : [Movie]
+    var searchTerm : String
+    var searchResults : [Movie]
+    
+    init() {
+        self.searchTerm = ""
+        self.searchResults = [Movie]()
+    }
 }

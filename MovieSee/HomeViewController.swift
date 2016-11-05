@@ -13,6 +13,8 @@ final class HomeViewController: UICollectionViewController {
     
     let store = MovieDataStore.sharedInstance
     
+    let shared = OMDBClient.sharedInstance
+    
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     @IBOutlet weak var searchField: UITextField!
@@ -33,6 +35,17 @@ final class HomeViewController: UICollectionViewController {
 extension HomeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        shared.searchAPI(withURL: "me", terms: "me",  handler: { result in
+            self.store.searchResults.append(result!)
+            
+            print(self.store.searchResults)
+            self.store.searchResults.forEach { mov in
+
+                self.store.movieArray = mov.searchResults
+                self.collectionView?.reloadData()
+            }
+        })
+
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
         self.searchButton.addTarget(self, action: #selector(downloadFromAPI), for: .touchUpInside)
@@ -61,8 +74,8 @@ extension HomeViewController : UITextFieldDelegate {
     }
     
     func downloadFromAPI() {
+        
         self.searches.removeAll()
-        let client = OMDBClient()
         let searchTerms = searchField.text?.components(separatedBy: " ")
         if (searchField.text?.characters.count)! > 0 {
             for term in searchTerms! {
@@ -72,35 +85,32 @@ extension HomeViewController : UITextFieldDelegate {
                     searchURL = term
                 }
             }
+            
             searchField.addSubview(activityIndicator)
             activityIndicator.frame = searchField.bounds
             activityIndicator.startAnimating()
-
+            
+            
             self.searches.removeAll()
-            client.searchOmdbForTerm(searchURL, completion: { result, error, json, page in
-//                if Int(page!)! > 10 {
-//                    client.searchOmdbForTerm(self.searchURL + "&page=2", completion: { result, error, json, page in
-//                        print(page!)
-//                        self.searches.append(result!)
-//                        self.collectionView?.reloadData()
-//                    })
-//                    
-//                }
-                
-                print(page!)
-                self.searches.append(result!)
-                self.activityIndicator.stopAnimating()
-                self.collectionView?.reloadData()
-            })
+            
+//            omdbClient.searchAPI(withURL: searchURL, terms: searchTerms?[0], handler: { jsonDict in
+//                print(jsonDict)
+//            })
+//            omdbClient.makeGETRequest(withURLTerms:searchURL, handler: { json in
+//                print(self.store.movieArray)
+//                self.collectionView?.reloadData()
+//            })
         }
-        collectionView?.reloadData()
     }
 }
 
 
+
 private extension HomeViewController {
     func movieForIndexPath(_ indexPath: IndexPath) -> Movie {
-        return (searches.last?.searchResults[(indexPath as NSIndexPath).row])!
+        return self.store.movieArray[(indexPath as NSIndexPath).row]
+        //return self.store.searchResultss[(indexPath as NSIndexPath).row]
+        //return (searches.last?.searchResults[(indexPath as NSIndexPath).row])!
         //return searches[(indexPath as NSIndexPath).section].searchResults[(indexPath as NSIndexPath).row]
     }
 }
@@ -109,11 +119,16 @@ private extension HomeViewController {
 extension HomeViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return searches.count
+        return 1
+        //return searches.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searches[section].searchResults.count
+        print("------\n\n\n\n\n")
+        print(self.store.movieArray.count)
+        
+        return self.store.movieArray.count
+        //return searches[section].searchResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -122,11 +137,10 @@ extension HomeViewController {
         
         //let movie = self.searches[self.searches.count - 1].searchResults[indexPath.row]
         let movie = movieForIndexPath(indexPath)
+        cell.imageView.image = movie.poster!
+        cell.titleLabel.text = movie.title
         if self.searches.count > 0 {
-            if movie.poster != nil {
-                cell.imageView.image = movie.poster
-            }
-            cell.titleLabel.text = movie.title
+            
         }
         return cell
     }

@@ -8,52 +8,77 @@
 
 import UIKit
 
-struct Movie: Hashable {
+struct Movie {
     /// The hash value.
     ///
     /// Hash values are not guaranteed to be equal across different executions of
     /// your program. Do not save hash values to use during a future execution.
     
     
-    var hashValue: Int {
-        return self.title.hash
-    }
-
-
-    
     var title: String
-    var director: String
-    var rated: String
-    var runtime: String
-    var plot: String
     var posterURL: String
-    var poster: UIImage
-    var genre: [String]
-    var released: String
-    var actors: [String]
+    var year: String
+    var poster: UIImage?
     
-    init(title:String, director: String, rated: String, runtime:String, plot: String, posterURL: String, poster: UIImage, genre:[String], released: String, actors: [String]) {
+    init(title: String, posterURL: String, year: String, poster: UIImage?) {
         self.title = title
-        self.director = director
-        self.rated = rated
-        self.runtime = runtime
-        self.plot = plot
         self.posterURL = posterURL
+        self.year = year
         self.poster = poster
-        self.genre = genre
-        self.released = released
-        self.actors = actors
     }
     
     
     init() {
-        self.init(title:"N/A", director: "N/A", rated:"N/A", runtime: "N/A", plot:"N/A", posterURL: "none", poster: UIImage(), genre: ["None"], released: "N/A", actors: ["None"])
+        self.init(title: "N/A", posterURL: "None", year: "Unknown", poster: nil)
     }
     
-    static func ==(left: Movie, right: Movie) -> Bool {
-        return left.title == right.title
+    
+    init(title: String, posterURL:String, year:String) {
+        self.init(title:title, posterURL: posterURL, year: year, poster:nil)
     }
+
 }
+
+    
+//    var hashValue: Int {
+//        return self.title.hash
+//    }
+//
+//
+//    
+//    var title: String
+//    var director: String
+//    var rated: String
+//    var runtime: String
+//    var plot: String
+//    var posterURL: String
+//    var poster: UIImage
+//    var genre: [String]
+//    var released: String
+//    var actors: [String]
+//    
+//    init(title:String, director: String, rated: String, runtime:String, plot: String, posterURL: String, poster: UIImage, genre:[String], released: String, actors: [String]) {
+//        self.title = title
+//        self.director = director
+//        self.rated = rated
+//        self.runtime = runtime
+//        self.plot = plot
+//        self.posterURL = posterURL
+//        self.poster = poster
+//        self.genre = genre
+//        self.released = released
+//        self.actors = actors
+//    }
+//    
+//    
+//    init() {
+//        self.init(title:"N/A", director: "N/A", rated:"N/A", runtime: "N/A", plot:"N/A", posterURL: "none", poster: UIImage(), genre: ["None"], released: "N/A", actors: ["None"])
+//    }
+//    
+//    static func ==(left: Movie, right: Movie) -> Bool {
+//        return left.title == right.title
+//    }
+//}
 
 
 //["Poster": https://images-na.ssl-images-amazon.com/images/M/MV5BMWJhYWQ3ZTEtYTVkOS00ZmNlLWIxZjYtODZjNTlhMjMzNGM2XkEyXkFqcGdeQXVyNzg5OTk2OA@@._V1_SX300.jpg, "Country": USA, "Plot": N/A, "Language": English, "Year": 1983, "Title": Star Wars, "Metascore": N/A, "Director": N/A, "Rated": N/A, "Runtime": N/A, "Writer": N/A, "imdbVotes": 362, "Genre": Action, Adventure, Sci-Fi, "imdbID": tt0251413, "Released": 01 May 1983, "imdbRating": 7.8, "Awards": N/A, "Actors": Harrison Ford, Alec Guinness, Mark Hamill, James Earl Jones, "Type": game, "Response": True]
