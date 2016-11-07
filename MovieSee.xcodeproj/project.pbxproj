@@ -14,6 +14,7 @@
 		A7098FB81DCCB9140097AF8B /* MovieDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7098FB71DCCB9140097AF8B /* MovieDataStore.swift */; };
 		A723AFDA1DCC54C000881182 /* OMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A723AFD91DCC54C000881182 /* OMDBClient.swift */; };
 		A723AFDC1DCC54D400881182 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A723AFDB1DCC54D400881182 /* Movie.swift */; };
+		A75F56EB1DCE6226003ADF9A /* AsyncOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F56EA1DCE6226003ADF9A /* AsyncOperations.swift */; };
 		A7C9848C1DCC0206009DB119 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C9848B1DCC0206009DB119 /* AppDelegate.swift */; };
 		A7C984911DCC0206009DB119 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7C9848F1DCC0206009DB119 /* Main.storyboard */; };
 		A7C984931DCC0206009DB119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7C984921DCC0206009DB119 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		A7098FB71DCCB9140097AF8B /* MovieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDataStore.swift; sourceTree = "<group>"; };
 		A723AFD91DCC54C000881182 /* OMDBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMDBClient.swift; sourceTree = "<group>"; };
 		A723AFDB1DCC54D400881182 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		A75F56EA1DCE6226003ADF9A /* AsyncOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperations.swift; sourceTree = "<group>"; };
 		A7C984881DCC0206009DB119 /* MovieSee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7C9848B1DCC0206009DB119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7C984901DCC0206009DB119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		A7C9848A1DCC0206009DB119 /* MovieSee */ = {
 			isa = PBXGroup;
 			children = (
+				A75F56EA1DCE6226003ADF9A /* AsyncOperations.swift */,
 				A723AFDB1DCC54D400881182 /* Movie.swift */,
 				A7C9848B1DCC0206009DB119 /* AppDelegate.swift */,
 				A7C9848F1DCC0206009DB119 /* Main.storyboard */,
@@ -298,6 +301,7 @@
 				A7098FB61DCC77A80097AF8B /* UIView+Extension.swift in Sources */,
 				A723AFDA1DCC54C000881182 /* OMDBClient.swift in Sources */,
 				A723AFDC1DCC54D400881182 /* Movie.swift in Sources */,
+				A75F56EB1DCE6226003ADF9A /* AsyncOperations.swift in Sources */,
 				A7D9AB7D1DCCE3C1007C5CE3 /* MovieDetailView.swift in Sources */,
 				A7C9848C1DCC0206009DB119 /* AppDelegate.swift in Sources */,
 				A7098FB41DCC69110097AF8B /* SearchResults.swift in Sources */,

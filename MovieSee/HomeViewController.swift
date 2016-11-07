@@ -15,6 +15,8 @@ final class HomeViewController: UICollectionViewController {
     let shared = OMDBClient.sharedInstance
     var searchURL = ""
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    var selected: Int?
+    
     
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
@@ -98,4 +100,18 @@ extension HomeViewController {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSize(width:view.frame.width, height:150)
     }
+    
+    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieDetail" {
+            let destinationVC = segue.destination as! MovieDetailViewController
+            let cell = sender as! MovieCell
+            let indexPaths = self.collectionView?.indexPath(for: cell)
+            let sentMovie = movieForIndexPath(indexPaths!)
+            destinationVC.passedMovie = sentMovie
+        }
+    }
 }
+
+

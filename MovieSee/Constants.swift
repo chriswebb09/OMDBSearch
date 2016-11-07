@@ -13,7 +13,7 @@ struct Constants {
         static let omdbURL = "http://www.omdbapi.com/"
         static let searchURL = "http://www.omdbapi.com/?s="
         static let baseURL = "http://www.omdbapi.com/?s=star+wars"
-       // static let baseURL = "http://www.omdbapi.com/?t=star+wars&y=&plot=short&r=json"
+        // static let baseURL = "http://www.omdbapi.com/?t=star+wars&y=&plot=short&r=json"
         //static let endURL = "&y=&plot=short&r=json"
     }
 }

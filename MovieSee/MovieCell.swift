@@ -22,13 +22,14 @@ class MovieCell: UICollectionViewCell {
         titleLabel.text = movie.title
         titleLabel.sizeToFit()
         
-        contentView.layer.cornerRadius = 2
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 1
-        contentView.layer.shadowOffset = CGSize(width: 6, height: 10)
-        contentView.layer.shadowRadius = 6
-        contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
-        contentView.layer.shouldRasterize = true
+        
+        layer.cornerRadius = 4
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize(width: 2, height: 4)
+        layer.shadowRadius = 1
+        layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shouldRasterize = true
     }
     
 }

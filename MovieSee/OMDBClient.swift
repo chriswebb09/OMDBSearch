@@ -18,6 +18,8 @@ class OMDBClient {
     let config = URLSessionConfiguration.default
     
     var queue = OperationQueue()
+
+   
     
     
     func makeGETRequest(withURLTerms terms: String, handler: @escaping (JSONData?) -> Void) {
@@ -65,6 +67,10 @@ class OMDBClient {
     }
     
     func searchAPI(withURL url: String?, terms: String?,  handler: @escaping (SearchResults?) -> Void) {
+        queue.name = "Image Filtration queue"
+        queue.maxConcurrentOperationCount = 1
+        queue.qualityOfService = .userInitiated
+        
         var returnedMovies = [Movie]()
         makeGETRequest(withURLTerms: url!, handler: { json in
             var movieData = json?["Search"] as! [[String: AnyObject]]
