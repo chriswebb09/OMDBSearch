@@ -85,7 +85,7 @@ extension HomeViewController {
     }
     
     
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "movieDetail" {
             let destinationVC = segue.destination as! MovieDetailViewController

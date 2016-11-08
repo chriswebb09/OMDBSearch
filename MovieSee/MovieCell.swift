@@ -16,13 +16,9 @@ class MovieCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     func configureCell(movie:Movie) {
-        
         imageView.image = movie.poster
-        
         titleLabel.text = movie.title
         titleLabel.sizeToFit()
-        
-        
         layer.cornerRadius = 4
         layer.shadowOpacity = 1
         layer.shadowOffset = CGSize(width: 2, height: 4)
