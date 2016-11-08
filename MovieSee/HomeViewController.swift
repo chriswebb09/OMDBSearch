@@ -11,25 +11,18 @@ import UIKit
 
 final class HomeViewController: UICollectionViewController {
     
-    let store = MovieDataStore.sharedInstance
-    let shared = OMDBClient.sharedInstance
-    var searchURL = ""
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    var selected: Int?
-    
-    
     @IBOutlet var movieCollectionView: UICollectionView!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchButtonItem: UIBarButtonItem!
     
+    let store = MovieDataStore.sharedInstance
+    var searchURL = ""
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    
     fileprivate let reuseIdentifier = "MovieCell"
     fileprivate let sectionInsets = UIEdgeInsets(top: 40.0, left: 30.0, bottom: 50.0, right: 30.0)
-    fileprivate var searches = [SearchResults]()
-    fileprivate let omdbClient = OMDBClient()
     fileprivate let itemsPerRow: CGFloat = 2
-    fileprivate var imageArray = [UIImage]()
-    
 }
 
 extension HomeViewController {
