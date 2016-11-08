@@ -8,15 +8,16 @@
 
 import UIKit
 
-
 final class HomeViewController: UICollectionViewController {
+    
+    let store = MovieDataStore.sharedInstance
     
     @IBOutlet var movieCollectionView: UICollectionView!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchButtonItem: UIBarButtonItem!
     
-    let store = MovieDataStore.sharedInstance
+    
     var searchURL = ""
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
