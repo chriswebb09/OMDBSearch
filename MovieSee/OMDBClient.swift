@@ -1,8 +1,8 @@
 //
 //  OMDBClient.swift
-//  MovieSee
+//  Movees
 //
-//  Created by Christopher Webb-Orenstein on 11/4/16.
+//  Created by Christopher Webb-Orenstein on 11/8/16.
 //  Copyright © 2016 Christopher Webb-Orenstein. All rights reserved.
 //
 
@@ -11,23 +11,19 @@ import UIKit
 typealias JSONData = [String : Any]
 
 class OMDBClient {
-    
-    static let sharedInstance = OMDBClient()
-    var store = MovieDataStore.sharedInstance
-    
-    let config = URLSessionConfiguration.default
-    
     var queue = OperationQueue()
-
-   
+    static let sharedInstance = OMDBClient()
+    let session = URLSession(configuration: URLSessionConfiguration.default)
+    var pageNumber = 1
     
+    func getNextPage() {
+        pageNumber += 1
+    }
     
-    func makeGETRequest(withURLTerms terms: String, handler: @escaping (JSONData?) -> Void) {
-        
-        guard let url = URL(string: Constants.Web.searchURL + terms) else { return }
+    func getJSONData(withURLTerms terms: String, handler: @escaping (JSONData?) -> Void) {
+        let pageNumberURL = "&page=\(pageNumber)"
+        guard let url = URL(string: Constants.Web.searchURL + terms + pageNumberURL) else { return }
         let urlRequest = URLRequest(url: url)
-        let session = URLSession(configuration: config)
-        
         session.dataTask(with: urlRequest) { data, response, error in
             let op1 = BlockOperation(block: {
                 guard let data = data else { handler(nil); return }
@@ -45,9 +41,10 @@ class OMDBClient {
     
     
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        let urlRequest = URLRequest(url:url)
+        session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             completion(data, response, error)
-            }.resume()
+        }).resume()
     }
     
     func downloadImage(url: URL, handler: @escaping (UIImage) -> Void) {
@@ -66,35 +63,25 @@ class OMDBClient {
         }
     }
     
-    func searchAPI(withURL url: String?, terms: String?,  handler: @escaping (SearchResults?) -> Void) {
-        queue.name = "Image Filtration queue"
+    func searchAPI(withSearchTerms terms: String?,  handler: @escaping (SearchResults?) -> Void) {
+        queue.name = "data queue"
         queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .userInitiated
-        
-        var returnedMovies = [Movie]()
-        makeGETRequest(withURLTerms: url!, handler: { json in
-            var movieData = json?["Search"] as! [[String: AnyObject]]
+        getJSONData(withURLTerms: terms!, handler: { json in
+            let movieData = json?["Search"] as! [[String: AnyObject]]
             var movieResult = SearchResults()
-            
+            var returnMovies = [Movie]()
             movieData.forEach { movieRes in
-                
                 let title = movieRes["Title"] as? String
                 let posterURL = movieRes["Poster"] as? String
                 let year = movieRes["Year"] as? String
-                
                 self.downloadImage(url: URL(string: posterURL!)!, handler: { image in
-                    dump(image)
-                    
-                    returnedMovies.append(Movie(title: title!, posterURL: posterURL!, year: year!, poster: image))
-                    DispatchQueue.main.async {
-                        movieResult.searchResults.append(Movie(title: title!, posterURL: posterURL!, year: year!, poster: image))
-                    }
-                    
-                    DispatchQueue.main.async {
-                        movieResult.searchTerm = terms!
-                        movieResult.searchResults = returnedMovies
-                        handler(movieResult)
-                    }
+                    let newMovie = Movie(title: title!, posterURL: posterURL!, year: year!, poster: image)
+                    returnMovies.append(newMovie)
+                    let setMovies = Set(returnMovies)
+                    movieResult.searchResults = Array(setMovies)
+                    movieResult.searchTerm = terms!
+                    handler(movieResult)
                 })
             }
         })

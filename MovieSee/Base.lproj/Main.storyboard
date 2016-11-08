@@ -90,6 +90,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="movieCollectionView" destination="hvZ-Ya-lGz" id="cLV-ad-dCf"/>
                         <outlet property="searchButton" destination="Uew-ls-2zU" id="0KI-66-7o1"/>
                         <outlet property="searchButtonItem" destination="xoU-jz-sP4" id="H7d-hD-MEK"/>
                         <outlet property="searchField" destination="VyT-s2-Fy0" id="p2a-VA-9fb"/>

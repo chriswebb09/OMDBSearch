@@ -18,6 +18,7 @@ final class HomeViewController: UICollectionViewController {
     var selected: Int?
     
     
+    @IBOutlet var movieCollectionView: UICollectionView!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchButtonItem: UIBarButtonItem!
@@ -40,10 +41,8 @@ extension HomeViewController {
     }
     
     func downloadFromAPI() {
-        
+        self.store.api.pageNumber = 1
         self.searchURL.removeAll()
-        self.searches.removeAll()
-        
         let searchTerms = searchField.text?.components(separatedBy: " ")
         if (searchField.text?.characters.count)! > 0 {
             for term in searchTerms! {
@@ -53,22 +52,12 @@ extension HomeViewController {
                     searchURL = term
                 }
             }
-            shared.searchAPI(withURL: searchURL, terms: searchURL,  handler: { result in
-                self.store.searchResults.append(result!)
-                print(self.store.searchResults)
-                self.store.searchResults.forEach { mov in
-                    DispatchQueue.main.async {
-                        self.store.movieArray = mov.searchResults
-                    }
-                }
+            self.store.fetchData(searchTerms: searchField.text!, completion: { result in
+                print(result)
                 DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
+                    self.movieCollectionView.reloadData()
                 }
             })
-            
-            self.searchField.text = nil
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.hidesWhenStopped = true
         }
     }
 }
